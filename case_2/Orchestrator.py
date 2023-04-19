@@ -56,3 +56,16 @@ def orchestrate():
                 , 'explicit'
                 , 'type'
             ]]
+
+            # Write dataframes on GCS as CSVs
+            bucket = "raw-data-gbo/spotify"
+            createdAt = datetime.date.today()
+            
+            for key in list(dfs.keys()):
+                dfs[key].to_csv(f"gs://{bucket}/{key}-{createdAt}", index=None, header=True)
+
+            return True
+
+        except Exception:
+            return False
+        
