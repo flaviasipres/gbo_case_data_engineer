@@ -9,3 +9,12 @@ from helpers import (
     extract_episodes_from_show_spotify
 )
 
+
+def orchestrate():
+    dfs = {}
+    while True:
+        try:
+            # Get Client ID and Client Secret
+            credentials = get_credentials_from_secret_manager()
+            client_id = credentials["spotify"]["client_id"]
+            client_secret = credentials["spotify"]["client_secret"]
