@@ -33,3 +33,35 @@ def search_for_podcasts_spotify(url, access_token):
     response = requests.request("GET", url, headers=headers, data=payload)
     return json.loads(response.text)
 
+
+def extract_episodes_from_show_spotify(url, access_token):
+    episodes = pd.DataFrame()
+    while True:
+        try:
+            headers = {
+                "Authorization": f"Bearer {access_token}"
+            }
+
+            params = {
+                "market": "BR",
+                "limit": 50,
+                "offset": 0
+            }
+
+            response = requests.get(url, headers=headers, params=params)
+
+            df = pd.json_normalize(
+                json.loads(response.text)['items']
+            )
+
+            episodes = pd.concat([
+                episodes
+                , df
+            ])
+
+            if json.loads(response.text)['next'] != "":
+                url = json.loads(response.text)['next']
+            
+        except:
+            break
+    return episodes

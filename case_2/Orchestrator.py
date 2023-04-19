@@ -40,3 +40,19 @@ def orchestrate():
                     , 'id'
                     , 'total_episodes'
                 ]]    
+
+            # Get all episodes by Data Hackers
+            data_hackers_id_spotify = '1oMIHOXsrLFENAeM743g93'
+            url = f"https://api.spotify.com/v1/shows/{data_hackers_id_spotify}/episodes"
+            dfs['data_hackers_episodes'] = extract_episodes_from_show_spotify(url, access_token)
+
+            dfs['data_hackers_episodes'] = dfs['data_hackers_episodes'][[
+                'id'
+                , 'name'
+                , 'description'
+                , 'release_date'
+                , 'duration_ms'
+                , 'language'
+                , 'explicit'
+                , 'type'
+            ]]
