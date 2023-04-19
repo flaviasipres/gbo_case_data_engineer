@@ -18,3 +18,7 @@ def orchestrate():
             credentials = get_credentials_from_secret_manager()
             client_id = credentials["spotify"]["client_id"]
             client_secret = credentials["spotify"]["client_secret"]
+            
+            # Get access token
+            url = "https://accounts.spotify.com/api/token"
+            access_token = get_access_token_spotify(url, client_id, client_secret)
