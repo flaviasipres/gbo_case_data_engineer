@@ -24,3 +24,12 @@ def get_access_token_spotify(url, client_id, client_secret):
     response = requests.request("POST", url, headers=headers, data=payload)
     return json.loads(response.text)['access_token']
 
+
+def search_for_podcasts_spotify(url, access_token):
+    payload={}
+    headers = {
+    'Authorization': f'Bearer {access_token}'
+    }
+    response = requests.request("GET", url, headers=headers, data=payload)
+    return json.loads(response.text)
+

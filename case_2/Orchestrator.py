@@ -22,3 +22,21 @@ def orchestrate():
             # Get access token
             url = "https://accounts.spotify.com/api/token"
             access_token = get_access_token_spotify(url, client_id, client_secret)
+
+            # Get the first 50 podcasts that contains "data hackers"
+            searched_term = "data hackers"
+            searched_type = "show"
+            limit = "50"
+            market = "BR"
+            url = f"https://api.spotify.com/v1/search?q={searched_term}&type={searched_type}&limit={limit}&market={market}"
+            
+            dfs['first_50_data_hackers_podcasts'] = search_for_podcasts_spotify(url, access_token)  
+            
+            dfs['first_50_data_hackers_podcasts'] = pd.json_normalize(
+                dfs['first_50_data_hackers_podcasts']['shows']['items']
+                )[[
+                    'name'
+                    , 'description'
+                    , 'id'
+                    , 'total_episodes'
+                ]]    
