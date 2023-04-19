@@ -1,0 +1,13 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - functions
+  - deploy
+  - Extract_Spotify_Data
+  - --source=gbo_case_data_engineer/Extract_Spotify_Data
+  - --trigger-http
+  - --runtime=python39
+  - --region=us-central1
+  - --timeout=540s
+  - --memory=2048MB
+  - --service-account=gbo-case2@gbo-case2.iam.gserviceaccount.com
