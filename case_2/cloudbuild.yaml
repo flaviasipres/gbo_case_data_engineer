@@ -4,7 +4,7 @@ steps:
   - functions
   - deploy
   - Extract_Spotify_Data
-  - --source=case2/Extract_Spotify_Data
+  - --source=.
   - --trigger-http
   - --runtime=python39
   - --region=us-central1
