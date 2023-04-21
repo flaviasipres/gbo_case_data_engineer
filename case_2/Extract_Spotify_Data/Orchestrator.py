@@ -63,7 +63,7 @@ def orchestrate():
             
             for key in list(dfs.keys()):
                 dfs[key].to_csv(f"gs://{bucket}/{key}-{createdAt}", index=None, header=True)
-
+                dfs[key].to_csv(f"gs://{bucket}/{key}", index=None, header=True)
             return True
 
         except Exception:
